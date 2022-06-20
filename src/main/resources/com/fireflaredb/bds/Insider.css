@@ -1,0 +1,15 @@
+.button {
+    -fx-background-color: transparent;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-font-family: "JetBrains Mono NL ExtraBold";
+    -fx-text-fill: #FFFFFF;
+    -fx-alignment: center;
+    -fx-background-radius: 0;
+}
+
+.button:hover {
+    -fx-background-color: #31384B;
+    -fx-text-fill: #FFFFFF;
+    -fx-cursor: hand;
+}
