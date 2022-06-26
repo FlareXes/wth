@@ -20,7 +20,7 @@ class Database implements Crud {
 
     Database() throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
-        conn = DriverManager.getConnection("jdbc:sqlite:test.db");
+        conn = DriverManager.getConnection("jdbc:sqlite:Users.db");
         stat = conn.createStatement();
 
         String sql = "CREATE TABLE IF NOT EXISTS Users" +
@@ -53,7 +53,7 @@ class Database implements Crud {
 
     public void executeQuery(String sqlQuery) throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
-        conn = DriverManager.getConnection("jdbc:sqlite:test.db");
+        conn = DriverManager.getConnection("jdbc:sqlite:Users.db");
         stat = conn.createStatement();
         conn.setAutoCommit(false);
         stat.executeUpdate(sqlQuery);
@@ -125,7 +125,7 @@ class User {
 
     public static ArrayList<Object> selectQuery(String sqlQuery) throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
-        conn = DriverManager.getConnection("jdbc:sqlite:test.db");
+        conn = DriverManager.getConnection("jdbc:sqlite:Users.db");
         conn.setAutoCommit(false);
         stat = conn.createStatement();
         ResultSet result = stat.executeQuery(sqlQuery);
@@ -170,7 +170,7 @@ class LogedinUser implements Crud {
     private static Statement stat = null;
     private String table = null;
 
-    LogedinUser(String table) {
+    public LogedinUser(String table) {
         this.table = table;
     }
 
@@ -187,7 +187,8 @@ class LogedinUser implements Crud {
 
     public ArrayList<Object> selectQuery(String sqlQuery) throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
-        conn = DriverManager.getConnection("jdbc:sqlite:Cluster.db");
+        conn = DriverManager.getConnection("jdbc:sqlite:Users.db");
+//        conn = DriverManager.getConnection("jdbc:sqlite:Cluster.db");
         conn.setAutoCommit(false);
         stat = conn.createStatement();
         ResultSet result = stat.executeQuery(sqlQuery);
@@ -196,12 +197,12 @@ class LogedinUser implements Crud {
         while (result.next()) {
             ArrayList<Object> details = new ArrayList<Object>();
             details.add(result.getInt("id"));
-            details.add(result.getInt("age"));
+//            details.add(result.getInt("age"));
             details.add(result.getString("phone"));
             details.add(result.getString("doner"));
-            details.add(result.getString("bg"));
-            details.add(result.getString("address"));
-            details.add(result.getString("email"));
+//            details.add(result.getString("bg"));
+//            details.add(result.getString("address"));
+//            details.add(result.getString("email"));
             userDetails.add(details);
         }
 

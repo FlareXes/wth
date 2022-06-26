@@ -1,6 +1,7 @@
 package com.fireflaredb.bds.Models;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 interface Operations {
     void createUser(String name, String phone, String password);
@@ -19,6 +20,13 @@ public class ViewsController implements Operations {
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<Object> readUser() throws SQLException, ClassNotFoundException {
+        LogedinUser user = new LogedinUser("Users");
+        String sqlQuery = "SELECT * FROM Users";
+        ArrayList<Object> data = user.selectQuery(sqlQuery);
+        return data;
     }
 
     @Override

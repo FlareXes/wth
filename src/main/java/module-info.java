@@ -11,6 +11,7 @@ module com.fireflaredb.bds {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.sql;
+    requires twilio;
 
     opens com.fireflaredb.bds to javafx.fxml;
     exports com.fireflaredb.bds;

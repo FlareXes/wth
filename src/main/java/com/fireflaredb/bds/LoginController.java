@@ -25,10 +25,18 @@ public class LoginController {
     public PasswordField password_entry;
 
     @FXML
-    public void onLoginBtnClick() {
+    public void onLoginBtnClick(ActionEvent event) throws IOException {
         String phone = phone_entry.getText();
         String password = password_entry.getText();
         System.out.println(phone + " " + password);
+
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("inside-view.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setResizable(false);
+        stage.setTitle("Insider | FireFlareDB");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void onRegisterBtnClick(ActionEvent event) throws IOException {
@@ -40,4 +48,14 @@ public class LoginController {
         stage.setScene(scene);
         stage.show();
     }
+
+//    public void onForgetPasswordLabelClick(ActionEvent event) throws IOException {
+//        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("inside-view.fxml")));
+//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        Scene scene = new Scene(root);
+//        stage.setResizable(false);
+//        stage.setTitle("Insider | FireFlareDB");
+//        stage.setScene(scene);
+//        stage.show();
+//    }
 }
