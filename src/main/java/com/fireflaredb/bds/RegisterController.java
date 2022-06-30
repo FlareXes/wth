@@ -7,8 +7,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,7 +23,7 @@ public class RegisterController {
     public Button register_btn;
     public PasswordField password_entry2;
     public PasswordField password_entry1;
-
+    public Label forgetPassword_label;
 
     public void onLoginBtnClick(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login-view.fxml")));
@@ -39,15 +41,19 @@ public class RegisterController {
         String password = (Objects.equals(password_entry1.getText(), password_entry2.getText())) ? password_entry1.getText() : null;
         if (password != null) {
             ViewsController userViews = new ViewsController();
-            userViews.createUser(fullname, phone, password);
+            userViews.createUser(fullname, phone, "pending", password);
             fullname_entry.clear();
             phone_entry.clear();
             password_entry1.clear();
             password_entry2.clear();
+            forgetPassword_label.setText("Registration Successful");
+            forgetPassword_label.setTextFill(Color.LIGHTGREEN);
             System.out.println("From RegisterController Side Passed User Created");
         } else {
             password_entry1.clear();
             password_entry2.clear();
+            forgetPassword_label.setText("Incorrect Password");
+            forgetPassword_label.setTextFill(Color.RED);
             System.out.println("From RegisterController Side Failed User Created");
             System.out.println("Password Is Null");
         }

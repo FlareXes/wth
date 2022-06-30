@@ -4,16 +4,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 interface Operations {
-    void createUser(String name, String phone, String password);
+    void createUser(String name, String phone, String verified, String password);
 
-    void deleteUser();
+    Boolean[] findUser(String phone, String password);
 }
 
 public class ViewsController implements Operations {
     @Override
-    public void createUser(String name, String phone, String password) {
+    public void createUser(String name, String phone, String verified, String password) {
         try {
-            new Database().create(name, phone, password);
+            new Database().create(name, phone, verified, password);
             System.out.println("User Created\n");
             User.createTable(name + "_" + phone);
             System.out.println("User Database Created");
@@ -25,12 +25,17 @@ public class ViewsController implements Operations {
     public ArrayList<Object> readUser() throws SQLException, ClassNotFoundException {
         LogedinUser user = new LogedinUser("Users");
         String sqlQuery = "SELECT * FROM Users";
-        ArrayList<Object> data = user.selectQuery(sqlQuery);
-        return data;
+        return user.selectQuery(sqlQuery);
     }
 
     @Override
-    public void deleteUser() {
-        // TODO Delete User
+    public Boolean[] findUser(String phone, String password) {
+            return User.login(phone, password);
     }
 }
+
+//class Temp extends ViewsController {
+//    public static void main(String[] args) {
+//       new ViewsController().createUser("B", "4321", "approved", "4321");
+//    }
+//}

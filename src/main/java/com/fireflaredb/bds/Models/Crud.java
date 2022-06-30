@@ -27,6 +27,7 @@ class Database implements Crud {
                 "(ID             INTEGER    PRIMARY KEY      NOT NULL             , " +
                 " DONER          TEXT                        NOT NULL             , " +
                 " PHONE          CHAR(20)                    NOT NULL       UNIQUE, " +
+                " VERIFIED       CHAR(20)                    NOT NULL             , " +
                 " PASSWORD       INT                         NOT NULL)";
         stat.executeUpdate(sql);
 
@@ -74,9 +75,9 @@ class Database implements Crud {
         }
     }
 
-    public void create(String doner, String phone, String password) {
+    public void create(String doner, String phone, String verified, String password) {
         String sqlQuery = String.format(
-                "INSERT INTO Users (DONER, PHONE, PASSWORD) VALUES ('%s', %s, '%s');", doner, phone, password);
+                "INSERT INTO Users (DONER, PHONE, VERIFIED, PASSWORD) VALUES ('%s', '%s', '%s', '%s');", doner, phone, verified, password);
         try {
             executeQuery(sqlQuery);
         } catch (ClassNotFoundException | SQLException e) {
@@ -133,6 +134,7 @@ class User {
         while (result.next()) {
             ArrayList<Object> details = new ArrayList<Object>();
             details.add(result.getString("phone"));
+            details.add(result.getString("verified"));
             details.add(result.getString("password"));
             userDetails.add(details);
         }
@@ -144,23 +146,44 @@ class User {
     }
 
     @SuppressWarnings("unchecked")
-    public static boolean login(String phone, String password) {
-        String sqlQuery = String.format("SELECT * FROM Users WHERE phone = %s", phone);
+//    public static boolean[] login(String phone, String password) {
+//        Boolean existsVerify[] = new Boolean[2];
+//        String sqlQuery = String.format("SELECT * FROM Users WHERE phone = %s AND password = %s", phone, password);
+//        try {
+//            ArrayList<Object> userCredentials = selectQuery(sqlQuery);
+//            if (userCredentials.size() == 1) {
+//                for (Object userC : userCredentials) {
+//                    ArrayList<String> creds = (ArrayList<String>) userC;
+//                    if (phone.equals(creds.get(0)) && password.equals(creds.get(1))) {
+//                        return true;
+//                    }
+//                }
+//            }
+//        } catch (ClassNotFoundException | SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return false;
+//    }
+
+    public static Boolean[] login(String phone, String password) {
+        Boolean[] existsVerify = {false, false};
+        String sqlQuery = String.format("SELECT * FROM Users WHERE phone = '%s' AND password = '%s'", phone, password);
         try {
             ArrayList<Object> userCredentials = selectQuery(sqlQuery);
             if (userCredentials.size() == 1) {
-                for (Object userC : userCredentials) {
-                    ArrayList<String> creds = (ArrayList<String>) userC;
-                    if (phone.equals(creds.get(0)) && password.equals(creds.get(1))) {
-                        return true;
-                    }
-                }
+                existsVerify[0] = true;
             }
+            for (Object userC : userCredentials) {
+                ArrayList<String> creds = (ArrayList<String>) userC;
+                System.out.println(creds.get(1));
+                if (creds.get(1).equals("approved"))
+                    existsVerify[1] = true;
+            }
+
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
-
-        return false;
+        return existsVerify;
     }
 }
 

@@ -39,5 +39,5 @@
             <Font name="JetBrains Mono Bold" size="18.0" />
         </font>
     </Button>
-    <Label layoutX="519.0" layoutY="644.0" stylesheets="@Vimpier.css" text="Forget your password?" />
+    <Label fx:id="forgetPassword_label" layoutX="519.0" layoutY="644.0" stylesheets="@Vimpier.css"/>
 </AnchorPane>
