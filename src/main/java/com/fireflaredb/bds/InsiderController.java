@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableView;
 
 import java.net.URL;
 
@@ -16,14 +17,11 @@ public class InsiderController implements Initializable{
     @FXML
     public Tab publicTab;
 
+    @FXML
+    public TableView publicTableView;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (! GlobalVariables.getUserVerified()) {
-            System.out.println("first exec");
-            memberTab.setDisable(true);
-        } else {
-            System.out.println("sec exec");
-            memberTab.setDisable(false);
-        }
+        memberTab.setDisable(!GlobalVariables.getUserVerified());
     }
 }

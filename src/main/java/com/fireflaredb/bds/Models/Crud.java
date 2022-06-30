@@ -145,26 +145,6 @@ class User {
         return userDetails;
     }
 
-    @SuppressWarnings("unchecked")
-//    public static boolean[] login(String phone, String password) {
-//        Boolean existsVerify[] = new Boolean[2];
-//        String sqlQuery = String.format("SELECT * FROM Users WHERE phone = %s AND password = %s", phone, password);
-//        try {
-//            ArrayList<Object> userCredentials = selectQuery(sqlQuery);
-//            if (userCredentials.size() == 1) {
-//                for (Object userC : userCredentials) {
-//                    ArrayList<String> creds = (ArrayList<String>) userC;
-//                    if (phone.equals(creds.get(0)) && password.equals(creds.get(1))) {
-//                        return true;
-//                    }
-//                }
-//            }
-//        } catch (ClassNotFoundException | SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return false;
-//    }
-
     public static Boolean[] login(String phone, String password) {
         Boolean[] existsVerify = {false, false};
         String sqlQuery = String.format("SELECT * FROM Users WHERE phone = '%s' AND password = '%s'", phone, password);

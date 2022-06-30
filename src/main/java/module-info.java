@@ -12,6 +12,7 @@ module com.fireflaredb.bds {
     requires com.almasb.fxgl.all;
     requires java.sql;
     requires twilio;
+    requires org.xerial.sqlitejdbc;
 
     opens com.fireflaredb.bds to javafx.fxml;
     exports com.fireflaredb.bds;
