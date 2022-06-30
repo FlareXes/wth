@@ -23,19 +23,29 @@ public class ViewsController implements Operations {
     }
 
     public ArrayList<Object> readUser() throws SQLException, ClassNotFoundException {
-        LogedinUser user = new LogedinUser("Users");
+        LogedinUser user = new LogedinUser("");
         String sqlQuery = "SELECT * FROM Users";
-        return user.selectQuery(sqlQuery);
+        return user.selectUserQuery(sqlQuery);
+    }
+
+    public ArrayList<Object> readCluster() throws SQLException, ClassNotFoundException {
+        LogedinUser cluster = new LogedinUser("");
+        String sqlQuery = "SELECT * FROM Administrator";
+        return cluster.selectMemberQuery(sqlQuery);
     }
 
     @Override
     public Boolean[] findUser(String phone, String password) {
             return User.login(phone, password);
     }
-}
 
-//class Temp extends ViewsController {
-//    public static void main(String[] args) {
-//       new ViewsController().createUser("B", "4321", "approved", "4321");
-//    }
-//}
+    public void insertMember(String doner, int age, String bg, String phone, String addr, String email) {
+        LogedinUser user = new LogedinUser("Administrator");
+        try {
+            user.create(doner, age, bg, phone, addr, email);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+}

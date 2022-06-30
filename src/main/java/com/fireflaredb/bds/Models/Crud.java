@@ -32,7 +32,7 @@ class Database implements Crud {
         stat.executeUpdate(sql);
 
         sql = "CREATE TABLE IF NOT EXISTS Administrator" +
-                "(ID             INT     PRIMARY KEY     NOT NULL, " +
+                "(ID             INTEGER     PRIMARY KEY     NOT NULL, " +
                 " DONER          TEXT    NOT NULL, " +
                 " AGE            INT     NOT NULL, " +
                 " BG             TEXT    NOT NULL, " +
@@ -188,10 +188,9 @@ class LogedinUser implements Crud {
         conn.close();
     }
 
-    public ArrayList<Object> selectQuery(String sqlQuery) throws ClassNotFoundException, SQLException {
+    public ArrayList<Object> selectUserQuery(String sqlQuery) throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
         conn = DriverManager.getConnection("jdbc:sqlite:Users.db");
-//        conn = DriverManager.getConnection("jdbc:sqlite:Cluster.db");
         conn.setAutoCommit(false);
         stat = conn.createStatement();
         ResultSet result = stat.executeQuery(sqlQuery);
@@ -200,12 +199,8 @@ class LogedinUser implements Crud {
         while (result.next()) {
             ArrayList<Object> details = new ArrayList<Object>();
             details.add(result.getInt("id"));
-//            details.add(result.getInt("age"));
             details.add(result.getString("phone"));
             details.add(result.getString("doner"));
-//            details.add(result.getString("bg"));
-//            details.add(result.getString("address"));
-//            details.add(result.getString("email"));
             userDetails.add(details);
         }
 
@@ -216,25 +211,98 @@ class LogedinUser implements Crud {
         return userDetails;
     }
 
-    public void create(String doner, int age, String bg, String phone, String addr, String email) {
+    public ArrayList<Object> selectClusterQuery(String sqlQuery) throws ClassNotFoundException, SQLException {
+        Class.forName("org.sqlite.JDBC");
+        conn = DriverManager.getConnection("jdbc:sqlite:Cluster.db");
+        conn.setAutoCommit(false);
+        stat = conn.createStatement();
+        ResultSet result = stat.executeQuery(sqlQuery);
+
+        ArrayList<Object> userDetails = new ArrayList<Object>();
+        while (result.next()) {
+            ArrayList<Object> details = new ArrayList<Object>();
+            details.add(result.getInt("id"));
+            details.add(result.getInt("age"));
+            details.add(result.getString("phone"));
+            details.add(result.getString("doner"));
+            details.add(result.getString("bg"));
+            details.add(result.getString("address"));
+            details.add(result.getString("email"));
+            userDetails.add(details);
+        }
+
+        conn.commit();
+        stat.close();
+        conn.close();
+
+        return userDetails;
+    }
+
+    public ArrayList<Object> selectMemberQuery(String sqlQuery) throws ClassNotFoundException, SQLException {
+        Class.forName("org.sqlite.JDBC");
+        conn = DriverManager.getConnection("jdbc:sqlite:Users.db");
+        conn.setAutoCommit(false);
+        stat = conn.createStatement();
+        ResultSet result = stat.executeQuery(sqlQuery);
+
+        ArrayList<Object> userDetails = new ArrayList<Object>();
+        while (result.next()) {
+            ArrayList<Object> details = new ArrayList<Object>();
+            details.add(result.getString("id"));
+            details.add(result.getString("age"));
+            details.add(result.getString("phone"));
+            details.add(result.getString("doner"));
+            details.add(result.getString("bg"));
+            details.add(result.getString("address"));
+            details.add(result.getString("email"));
+            userDetails.add(details);
+        }
+
+        conn.commit();
+        stat.close();
+        conn.close();
+
+        return userDetails;
+    }
+
+
+    //    public void create(String doner, int age, String bg, String phone, String addr, String email) {
+//        String sqlQuery = String.format(
+//                "INSERT INTO %s (DONER, AGE, BG, PHONE, ADDRESS, EMAIL) VALUES ('%s', %d, '%s', %s, '%s', '%s');",
+//                table, doner, age, bg, phone, addr, email);
+//        try {
+//            executeQuery(sqlQuery);
+//        } catch (ClassNotFoundException | SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+    public void create(String doner, int age, String bg, String phone, String addr, String email) throws SQLException {
         String sqlQuery = String.format(
                 "INSERT INTO %s (DONER, AGE, BG, PHONE, ADDRESS, EMAIL) VALUES ('%s', %d, '%s', %s, '%s', '%s');",
                 table, doner, age, bg, phone, addr, email);
         try {
-            executeQuery(sqlQuery);
+            Class.forName("org.sqlite.JDBC");
+            conn = DriverManager.getConnection("jdbc:sqlite:Users.db");
+            conn.setAutoCommit(false);
+            stat = conn.createStatement();
+            stat.executeUpdate(sqlQuery);
+            conn.commit();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
+        } finally {
+            stat.close();
+            conn.close();
         }
     }
 
     @Override
     public void read() {
         String sqlQuery = String.format("SELECT * FROM %s", table);
-        try {
-            selectQuery(sqlQuery);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            selectQuery(sqlQuery);
+//        } catch (ClassNotFoundException | SQLException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override

@@ -15,13 +15,13 @@
                             <children>
                                 <TableView fx:id="publicTableView" prefHeight="669.0" prefWidth="1200.0">
                                     <columns>
-                                        <TableColumn prefWidth="75.0" text="S.No."/>
-                                        <TableColumn prefWidth="181.0" text="Doner"/>
-                                        <TableColumn prefWidth="164.0" text="Contact"/>
-                                        <TableColumn prefWidth="166.0" text="Blood Group"/>
-                                        <TableColumn prefWidth="106.0" text="Age"/>
-                                        <TableColumn prefWidth="214.0" text="E-Mail"/>
-                                        <TableColumn prefWidth="293.0" text="Address"/>
+                                        <TableColumn fx:id="snoCol" prefWidth="75.0" text="S.No."/>
+                                        <TableColumn fx:id="donerCol" prefWidth="181.0" text="Doner"/>
+                                        <TableColumn fx:id="contactCol" prefWidth="164.0" text="Contact"/>
+                                        <TableColumn fx:id="bgCol" prefWidth="166.0" text="Blood Group"/>
+                                        <TableColumn fx:id="ageCol" prefWidth="106.0" text="Age"/>
+                                        <TableColumn fx:id="emailCol" prefWidth="214.0" text="E-Mail"/>
+                                        <TableColumn fx:id="addressCol" prefWidth="293.0" text="Address"/>
                                     </columns>
                                 </TableView>
                             </children>
