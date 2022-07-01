@@ -13,7 +13,7 @@ public class Twillo {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         Verification verification = Verification.creator(
                         "VA3d0334886ce77236ccbedb5dd9ee2ea8",
-                        phone,
+                        "+91" + phone,
                         "sms")
                 .create();
         System.out.println("OTP Sent");
@@ -26,7 +26,7 @@ public class Twillo {
         VerificationCheck verificationCheck = VerificationCheck.creator(
                         "VA3d0334886ce77236ccbedb5dd9ee2ea8",
                         revOTP)
-                .setTo(phone).create();
+                .setTo("+91" + phone).create();
         if (verificationCheck.getStatus() == "approved") {
             flag = true;
         }
@@ -34,3 +34,5 @@ public class Twillo {
         return flag;
     }
 }
+
+//9358361733

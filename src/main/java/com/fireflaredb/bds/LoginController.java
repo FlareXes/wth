@@ -47,7 +47,7 @@ public class LoginController {
         } else if (isUserExists) {
             GlobalVariables.setCurrentLoginedUserPhone(phone);
             if (isUserVerified) {
-                Twillo.sendOTP(phone);
+               // Twillo.sendOTP(phone);// TODO uncomment this
                 Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("otp-view.fxml")));
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root);

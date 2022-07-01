@@ -5,9 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
@@ -29,38 +27,13 @@ public class InsiderController implements Initializable {
     public TableColumn ageCol;
     public TableColumn emailCol;
     public TableColumn addressCol;
-
-    public ObservableList<ClusterTableView> getObservableList() throws RuntimeException {
-
-        ArrayList<Object> clusterArrays = null;
-        try {
-            clusterArrays = new ViewsController().readCluster();
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        String id = "", age = "";
-        String doner = "";
-        String contact = "";
-        String bg = "";
-        String address = "";
-        String email = "";
-
-        for (Object userC : clusterArrays) {
-            ArrayList<String> clusterArray = (ArrayList<String>) userC;
-            id = clusterArray.get(1);
-            age = clusterArray.get(1);
-            contact = clusterArray.get(2);
-            doner = clusterArray.get(3);
-            bg = clusterArray.get(4);
-            address = clusterArray.get(5);
-            email = clusterArray.get(6);
-        }
-
-        return FXCollections.observableArrayList(
-                new ClusterTableView(id, doner, contact, bg, age, email, address)
-        );
-    }
+    public TextField fullname_entry;
+    public TextField bg_entry;
+    public TextField age_entry;
+    public TextField phone_entry;
+    public TextField email_entry;
+    public TextField address_entry;
+    public Button addDonerBtn;
 
 
     @Override
@@ -103,5 +76,16 @@ public class InsiderController implements Initializable {
             datos.add(new ClusterTableView(id, doner, contact, bg, age, email, address));
         }
         publicTableView.setItems(datos);
+    }
+
+    public void addMember() {
+        String fullname = fullname_entry.getText();
+        int age = Integer.parseInt(age_entry.getText());
+        String address = address_entry.getText();
+        String email = email_entry.getText();
+        String phone = phone_entry.getText();
+        String bg = bg_entry.getText();
+//        new ViewsController().insertMember(fullname, age, bg, phone, address, email);
+//        System.out.println("Member Inserted");
     }
 }

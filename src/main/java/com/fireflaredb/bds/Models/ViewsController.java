@@ -1,5 +1,7 @@
 package com.fireflaredb.bds.Models;
 
+import com.fireflaredb.bds.GlobalVariables;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -36,16 +38,23 @@ public class ViewsController implements Operations {
 
     @Override
     public Boolean[] findUser(String phone, String password) {
-            return User.login(phone, password);
+        return User.login(phone, password);
     }
 
     public void insertMember(String doner, int age, String bg, String phone, String addr, String email) {
-        LogedinUser user = new LogedinUser("Administrator");
+        LogedinUser logedinUser = new LogedinUser("Administrator");
+        String userSpecificTable = GlobalVariables.getCurrentLoginedUserName() + "_" + GlobalVariables.getCurrentLoginedUserPhone();
         try {
-            user.create(doner, age, bg, phone, addr, email);
+            User.insertUserSpecific(userSpecificTable, doner, age, bg, phone, addr, email);
+            logedinUser.create(doner, age, bg, phone, addr, email);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-
 }
+
+//class Temp {
+//    public static void main(String[] args) {
+//       new ViewsController().createUser("name", "321", "approved", "qw");
+//    }
+//}

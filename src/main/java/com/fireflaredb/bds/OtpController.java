@@ -31,7 +31,8 @@ public class OtpController {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode() == KeyCode.ENTER) {
-                    if (Twillo.verifyOTP(otp_entry.getText(), GlobalVariables.getCurrentLoginedUserPhone())) {
+//                    if (Twillo.verifyOTP(otp_entry.getText(), GlobalVariables.getCurrentLoginedUserPhone())) { //TODO uncomment this
+                    if (true) {
                         Parent root = null;
                         try {
                             root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("insider-view.fxml")));

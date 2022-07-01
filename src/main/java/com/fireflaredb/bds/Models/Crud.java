@@ -134,6 +134,7 @@ class User {
         while (result.next()) {
             ArrayList<Object> details = new ArrayList<Object>();
             details.add(result.getString("phone"));
+//            details.add(result.getString("doner"));
             details.add(result.getString("verified"));
             details.add(result.getString("password"));
             userDetails.add(details);
@@ -143,6 +144,28 @@ class User {
         stat.close();
         conn.close();
         return userDetails;
+    }
+
+    public static void executeQuery(String sqlQuery) throws ClassNotFoundException, SQLException {
+        Class.forName("org.sqlite.JDBC");
+        conn = DriverManager.getConnection("jdbc:sqlite:Users.db");
+        conn.setAutoCommit(false);
+        stat = conn.createStatement();
+        stat.executeUpdate(sqlQuery);
+        conn.commit();
+        stat.close();
+        conn.close();
+    }
+
+    public static void insertUserSpecific(String table, String doner, int age, String bg, String phone, String addr, String email) {
+        String sqlQuery = String.format(
+                "INSERT INTO %s (DONER, AGE, BG, PHONE, ADDRESS, EMAIL) VALUES ('%s', %d, '%s', %s, '%s', '%s');",
+                table, doner, age, bg, phone, addr, email);
+        try {
+            executeQuery(sqlQuery);
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static Boolean[] login(String phone, String password) {
@@ -159,7 +182,6 @@ class User {
                 if (creds.get(1).equals("approved"))
                     existsVerify[1] = true;
             }
-
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }

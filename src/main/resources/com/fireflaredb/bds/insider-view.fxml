@@ -6,91 +6,75 @@
 <AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #31384B;"
             xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.fireflaredb.bds.InsiderController">
-    <children>
-        <TabPane layoutX="-1.0" prefHeight="700.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE">
-            <tabs>
-                <Tab fx:id="publicTab" text="Public">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <TableView fx:id="publicTableView" prefHeight="669.0" prefWidth="1200.0">
-                                    <columns>
-                                        <TableColumn fx:id="snoCol" prefWidth="75.0" text="S.No."/>
-                                        <TableColumn fx:id="donerCol" prefWidth="181.0" text="Doner"/>
-                                        <TableColumn fx:id="contactCol" prefWidth="164.0" text="Contact"/>
-                                        <TableColumn fx:id="bgCol" prefWidth="166.0" text="Blood Group"/>
-                                        <TableColumn fx:id="ageCol" prefWidth="106.0" text="Age"/>
-                                        <TableColumn fx:id="emailCol" prefWidth="214.0" text="E-Mail"/>
-                                        <TableColumn fx:id="addressCol" prefWidth="293.0" text="Address"/>
-                                    </columns>
-                                </TableView>
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-                <Tab fx:id="memberTab" closable="false" text="Member">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
-                                    stylesheets="@Vimpier.css">
-                            <children>
-                                <TextField fx:id="phone_entry" layoutX="219.0" layoutY="190.0" prefHeight="39.0"
-                                           prefWidth="271.0" promptText="Full Name" stylesheets="@Vimpier.css">
-                                    <font>
-                                        <Font name="JetBrains Mono Bold" size="20.0"/>
-                                    </font>
-                                </TextField>
-                                <TextField fx:id="phone_entry2" layoutX="219.0" layoutY="295.0" prefHeight="39.0"
-                                           prefWidth="271.0" promptText="Blood Group" stylesheets="@Vimpier.css">
-                                    <font>
-                                        <Font name="JetBrains Mono Bold" size="20.0"/>
-                                    </font>
-                                </TextField>
-                                <TextField fx:id="phone_entry21" layoutX="219.0" layoutY="409.0" prefHeight="39.0"
-                                           prefWidth="271.0" promptText="Age" stylesheets="@Vimpier.css">
-                                    <font>
-                                        <Font name="JetBrains Mono Bold" size="20.0"/>
-                                    </font>
-                                </TextField>
-                                <TextField fx:id="phone_entry1" layoutX="635.0" layoutY="190.0" prefHeight="39.0"
-                                           prefWidth="271.0" promptText="Mobile No." stylesheets="@Vimpier.css">
-                                    <font>
-                                        <Font name="JetBrains Mono Bold" size="20.0"/>
-                                    </font>
-                                </TextField>
-                                <TextField fx:id="phone_entry11" layoutX="635.0" layoutY="295.0" prefHeight="39.0"
-                                           prefWidth="271.0" promptText="E-Mail" stylesheets="@Vimpier.css">
-                                    <font>
-                                        <Font name="JetBrains Mono Bold" size="20.0"/>
-                                    </font>
-                                </TextField>
-                                <TextField fx:id="phone_entry111" layoutX="635.0" layoutY="409.0" prefHeight="39.0"
-                                           prefWidth="271.0" promptText="Address" stylesheets="@Vimpier.css">
-                                    <font>
-                                        <Font name="JetBrains Mono Bold" size="20.0"/>
-                                    </font>
-                                </TextField>
-                                <Button fx:id="login_btn" layoutX="972.0" layoutY="68.0" minHeight="39.0"
-                                        mnemonicParsing="false" prefHeight="52.0" prefWidth="135.0"
-                                        stylesheets="@Vimpier.css" text="Add Doner" wrapText="true">
-                                    <font>
-                                        <Font name="JetBrains Mono Bold" size="18.0"/>
-                                    </font>
-                                </Button>
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-                <Tab text="Family">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
-                    </content>
-                </Tab>
-                <Tab text="My Account">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
-                    </content>
-                </Tab>
-            </tabs>
-        </TabPane>
-    </children>
+    <TabPane layoutX="-1.0" prefHeight="700.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE">
+        <Tab fx:id="publicTab" text="Public">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <TableView fx:id="publicTableView" prefHeight="669.0" prefWidth="1200.0">
+                    <columns>
+                        <TableColumn fx:id="snoCol" prefWidth="75.0" text="S.No."/>
+                        <TableColumn fx:id="donerCol" prefWidth="181.0" text="Doner"/>
+                        <TableColumn fx:id="contactCol" prefWidth="164.0" text="Contact"/>
+                        <TableColumn fx:id="bgCol" prefWidth="166.0" text="Blood Group"/>
+                        <TableColumn fx:id="ageCol" prefWidth="106.0" text="Age"/>
+                        <TableColumn fx:id="emailCol" prefWidth="214.0" text="E-Mail"/>
+                        <TableColumn fx:id="addressCol" prefWidth="293.0" text="Address"/>
+                    </columns>
+                </TableView>
+            </AnchorPane>
+        </Tab>
+        <Tab fx:id="memberTab" closable="false" text="Member">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
+                        stylesheets="@Vimpier.css">
+                <TextField fx:id="fullname_entry" layoutX="219.0" layoutY="190.0" prefHeight="39.0"
+                           prefWidth="271.0" promptText="Full Name" stylesheets="@Vimpier.css">
+                    <font>
+                        <Font name="JetBrains Mono Bold" size="20.0"/>
+                    </font>
+                </TextField>
+                <TextField fx:id="bg_entry" layoutX="219.0" layoutY="295.0" prefHeight="39.0"
+                           prefWidth="271.0" promptText="Blood Group" stylesheets="@Vimpier.css">
+                    <font>
+                        <Font name="JetBrains Mono Bold" size="20.0"/>
+                    </font>
+                </TextField>
+                <TextField fx:id="age_entry" layoutX="219.0" layoutY="409.0" prefHeight="39.0"
+                           prefWidth="271.0" promptText="Age" stylesheets="@Vimpier.css">
+                    <font>
+                        <Font name="JetBrains Mono Bold" size="20.0"/>
+                    </font>
+                </TextField>
+                <TextField fx:id="phone_entry" layoutX="635.0" layoutY="190.0" prefHeight="39.0"
+                           prefWidth="271.0" promptText="Mobile No." stylesheets="@Vimpier.css">
+                    <font>
+                        <Font name="JetBrains Mono Bold" size="20.0"/>
+                    </font>
+                </TextField>
+                <TextField fx:id="email_entry" layoutX="635.0" layoutY="295.0" prefHeight="39.0"
+                           prefWidth="271.0" promptText="E-Mail" stylesheets="@Vimpier.css">
+                    <font>
+                        <Font name="JetBrains Mono Bold" size="20.0"/>
+                    </font>
+                </TextField>
+                <TextField fx:id="address_entry" layoutX="635.0" layoutY="409.0" prefHeight="39.0"
+                           prefWidth="271.0" promptText="Address" stylesheets="@Vimpier.css">
+                    <font>
+                        <Font name="JetBrains Mono Bold" size="20.0"/>
+                    </font>
+                </TextField>
+                <Button fx:id="addDonerBtn" onAction="#addMember" layoutX="972.0" layoutY="68.0" minHeight="39.0"
+                        mnemonicParsing="false" prefHeight="52.0" prefWidth="135.0"
+                        stylesheets="@Vimpier.css" text="Add Doner" wrapText="true">
+                    <font>
+                        <Font name="JetBrains Mono Bold" size="18.0"/>
+                    </font>
+                </Button>
+            </AnchorPane>
+        </Tab>
+        <Tab text="Family">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+        </Tab>
+        <Tab text="My Account">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+        </Tab>
+    </TabPane>
 </AnchorPane>
